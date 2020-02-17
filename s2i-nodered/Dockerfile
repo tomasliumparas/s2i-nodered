@@ -1,5 +1,5 @@
 # nodered-centos7
-FROM nodered-base-centos7
+FROM s2i-nodered-base-centos7
 
 # TODO: Put the maintainer name in the image metadata
 # LABEL maintainer="Your Name <your@email.com>"
