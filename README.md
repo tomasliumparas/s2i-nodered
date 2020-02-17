@@ -1,3 +1,5 @@
+[![Build Status](https://drone.getais.cloud/api/badges/tomasliumparas/s2i-nodered/status.svg)](https://drone.getais.cloud/tomasliumparas/s2i-nodered)
+
 # Node-red S2I container image
 This container image includes Node-red for OpenShift and general usage. 
 
