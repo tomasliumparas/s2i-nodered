@@ -5,7 +5,7 @@ This container image includes Node-red for OpenShift and general usage.
 
 Image is built is as follows:
 ```bash
-s2i-nodejs-10-git-centos7 - Origina nodejs-10-centos7 builder image updated to include GIT v.2.X so that project feature could be enabled
+s2i-nodejs-10-git-centos7 - Original nodejs-10-centos7 builder image updated to include GIT v.2.X so that project feature could be enabled
 s2i-nodered-base-centos7 - S2I build from Node-red package.json using s2i-nodejs-10-git
 s2i-nodered-centos7 - Enabling S2I over s2i-nodered-base image
 ```
