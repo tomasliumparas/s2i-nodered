@@ -1,0 +1,56 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: Install S2i
+  image: alpine
+  volumes:
+    - name: docker-socket
+      path: /var/run/docker.sock
+  commands:
+    - wget -O - https://github.com/openshift/source-to-image/releases/download/v1.2.0/source-to-image-v1.2.0-2a579ecd-linux-amd64.tar.gz | tar -xzvf -
+
+- name: BUILD nodejs-10-git-centos7
+  image: alpine
+  volumes:
+    - name: docker-socket
+      path: /var/run/docker.sock
+  commands:
+    - apk add docker
+    - docker build -t nodejs-10-git-centos7 s2i-nodejs-10-git/
+
+- name: BUILD nodered-base-centos7
+  image: alpine
+  volumes:
+    - name: docker-socket
+      path: /var/run/docker.sock
+  commands:
+    - ./s2i build s2i-nodered-base/ nodejs-10-git-centos7 nodered-base-centos7
+
+
+- name: BUILD nodered-centos7
+  image: alpine
+  volumes:
+    - name: docker-socket
+      path: /var/run/docker.sock
+  commands:
+    - apk add docker
+    - docker build -t nodered-centos7 s2i-nodered/
+
+
+- name: BUILD nodered-example-app
+  image: alpine
+  volumes:
+    - name: docker-socket
+      path: /var/run/docker.sock
+  commands:
+    - ./s2i build s2i-nodered/test-app/ nodered-centos7 nodered-example-app
+
+
+
+volumes:
+  - name: docker-socket
+    host:
+      path: /var/run/docker.sock
+
