@@ -34,10 +34,16 @@ steps:
   volumes:
     - name: docker-socket
       path: /var/run/docker.sock
+  environment:
+    DOCKER_USER:
+      from_secret: DOCKER_USER
+    DOCKER_TOKEN:
+      from_secret: DOCKER_TOKEN
   commands:
     - apk add docker
     - docker build -t nodered-centos7 s2i-nodered/
     - docker tag nodered-centos7 getais/nodered-centos7
+    - docker login -u $DOCKER_USER -p $DOCKER_TOKEN
     - docker push getais/nodered-centos7
 
 
