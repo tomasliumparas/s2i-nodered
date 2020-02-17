@@ -37,6 +37,8 @@ steps:
   commands:
     - apk add docker
     - docker build -t nodered-centos7 s2i-nodered/
+    - docker tag nodered-centos7 getais/nodered-centos7
+    - docker push getais/nodered-centos7
 
 
 - name: BUILD nodered-example-app
