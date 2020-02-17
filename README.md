@@ -19,12 +19,12 @@ $ ls -la test-app
 
 If you want to create a new container layered image, you can use the Source build feature of Openshift. To create a new Node-red application in Openshift, while using data available in test-app on the host, execute the following command:
 ```bash
-oc new-app nodered-centos7:latest~/test-app --name nodered-test-app
+oc new-app getais/s2i-nodered-centos7:latest~./test-app --name nodered-test-app
 ```
 
 The same application can also be built using the standalone S2I application on systems that have it available
 ```bash
-$ s2i build test-app/ getais/nodered-centos7 nodered-test-app
+$ s2i build test-app/ getais/s2i-nodered-centos7 nodered-test-app
 ```
 
 
