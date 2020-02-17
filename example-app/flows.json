@@ -1,0 +1,81 @@
+[
+    {
+        "id": "6ab5d417.e92fac",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "7bde09cd.898778",
+        "type": "template",
+        "z": "6ab5d417.e92fac",
+        "name": "Hello OpenShift",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Hello OpenShift!",
+        "output": "str",
+        "x": 340,
+        "y": 120,
+        "wires": [
+            [
+                "45838b69.fa9ed4"
+            ]
+        ]
+    },
+    {
+        "id": "758a3f62.5db93",
+        "type": "http in",
+        "z": "6ab5d417.e92fac",
+        "name": "",
+        "url": "/hello",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 120,
+        "wires": [
+            [
+                "7bde09cd.898778",
+                "55c36c05.feac84"
+            ]
+        ]
+    },
+    {
+        "id": "45838b69.fa9ed4",
+        "type": "http response",
+        "z": "6ab5d417.e92fac",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 530,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "55c36c05.feac84",
+        "type": "debug",
+        "z": "6ab5d417.e92fac",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 330,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "8ed5ba55.16b3b8",
+        "type": "comment",
+        "z": "6ab5d417.e92fac",
+        "name": "Hello OpenShift example",
+        "info": "",
+        "x": 150,
+        "y": 60,
+        "wires": []
+    }
+]
