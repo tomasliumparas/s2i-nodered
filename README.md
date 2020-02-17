@@ -24,6 +24,11 @@ cd s2i-nodered
 oc new-app getais/s2i-nodered-centos7:latest~. --context-dir example-app --name nodered-example-app
 ```
 
+Or without locally cloning the repository:
+```bash
+oc new-app getais/s2i-nodered-centos7:latest~https://github.com/tomasliumparas/s2i-nodered.git --context-dir example-app --name nodered-example-app
+```
+
 The same application can also be built using the standalone S2I application on systems that have it available
 ```bash
 $ s2i build example-app/ getais/s2i-nodered-centos7 nodered-example-app
