@@ -11,12 +11,19 @@ Node-RED is a programming tool for wiring together hardware devices, APIs and on
 It provides a browser-based editor that makes it easy to wire together flows using the wide range of nodes in the palette that can be deployed to its runtime in a single-click.
 
 ## Usage
-An example of the data on the host that will be used for the builder image:
-```bash
-$ ls -la test-app 
--rw-r--r--. 1 root root 3 Feb 17 02:27 flows.json
+The structure of example-app can look like this:
 ```
+./flows.json
+```
+A file containing Node-red flows
 
+```
+./settings.js
+```
+An override Node-red settings file
+
+
+### Building on OpenShift
 If you want to create a new container layered image, you can use the Source build feature of Openshift. To create a new Node-red application in Openshift, while using data available in test-app on the host, execute the following command:
 ```bash
 git clone https://github.com/tomasliumparas/s2i-nodered.git
@@ -29,22 +36,21 @@ Or without locally cloning the repository:
 oc new-app getais/s2i-nodered-centos7:latest~https://github.com/tomasliumparas/s2i-nodered.git --context-dir example-app --name nodered-example-app
 ```
 
+Checking if example application is working (from within the OpenShift cluster):
+```bash
+curl nodered-test-app.<openshift-project>.svc:1880/hello
+Hello OpenShift!
+```
+
+Creating OpenShift route:
+```bash
+oc expose 
+
+### Building using standalone S2i
 The same application can also be built using the standalone S2I application on systems that have it available
 ```bash
 $ s2i build example-app/ getais/s2i-nodered-centos7 nodered-example-app
 ```
-
-
-The structure of test-app can look like this:
-```
-./flows.json
-```
-A file containing Node-red flows
-
-```
-./settings.js
-```
-An override Node-red settings file
 
 
 
