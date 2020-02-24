@@ -1,4 +1,4 @@
-FROM centos/s2i-base-centos7:1
+FROM centos/nodejs-10-centos7
 
 # This image provides a Node.JS environment you can use to run your Node.JS
 # applications.
@@ -48,24 +48,14 @@ LABEL summary="$SUMMARY" \
       help="For more information visit https://github.com/sclorg/s2i-nodejs-container" \
       usage="s2i build <SOURCE-REPOSITORY> centos/$NAME-$NODEJS_VERSION-centos7:latest <APP-NAME>"
 
-RUN yum install -y centos-release-scl-rh && \
-    ( [ "rh-${NAME}${NODEJS_VERSION}" != "${NODEJS_SCL}" ] && yum remove -y ${NODEJS_SCL}\* || : ) && \
-    INSTALL_PKGS="rh-nodejs${NODEJS_VERSION} rh-nodejs${NODEJS_VERSION}-npm rh-nodejs${NODEJS_VERSION}-nodejs-nodemon nss_wrapper" && \
-    ln -s /usr/lib/node_modules/nodemon/bin/nodemon.js /usr/bin/nodemon && \
-    yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
-    rpm -V $INSTALL_PKGS && \
-    yum -y clean all --enablerepo='*'
+USER 0
 
 # Install GITv.2
 RUN yum -y remove git && \
     yum -y install  https://centos7.iuscommunity.org/ius-release.rpm && \
-    yum -y install  git2u-all
+    yum -y install  git2u-all && \
+    yum -y clean all --enablerepo='*'
 
-# Copy the S2I scripts from the specific language image to $STI_SCRIPTS_PATH
-COPY ./s2i/bin/ $STI_SCRIPTS_PATH
-
-# Copy extra files to the image, including help file.
-COPY ./root/ /
 
 # Drop the root user and make the content of /opt/app-root owned by user 1001
 RUN chown -R 1001:0 ${APP_ROOT} && chmod -R ug+rwx ${APP_ROOT} && \
@@ -73,5 +63,3 @@ RUN chown -R 1001:0 ${APP_ROOT} && chmod -R ug+rwx ${APP_ROOT} && \
 
 USER 1001
 
-# Set the default CMD to print the usage of the language image
-CMD $STI_SCRIPTS_PATH/usage
