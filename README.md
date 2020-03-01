@@ -20,14 +20,14 @@ It provides a browser-based editor that makes it easy to wire together flows usi
 ## Usage
 The structure of example-app can look like this:
 ```
-./flows.json
+./projects/main/flow.json
 ```
-A file containing Node-red flows
+A file containing Node-red flows. Which will be set as an active project. Currently only "main" is supported
 
 ```
 ./settings.js
 ```
-An override Node-red settings file
+An override Node-red settings file (optional)
 
 
 ### Building on OpenShift
@@ -52,6 +52,7 @@ Hello OpenShift!
 Creating OpenShift route:
 ```bash
 oc expose 
+```
 
 ### Building using standalone S2i
 The same application can also be built using the standalone S2I application on systems that have it available
