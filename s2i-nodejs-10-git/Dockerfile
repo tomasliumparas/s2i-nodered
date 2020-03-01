@@ -53,7 +53,7 @@ USER 0
 # Install GITv.2
 RUN yum -y remove git && \
     yum -y install  https://centos7.iuscommunity.org/ius-release.rpm && \
-    yum -y install  git2u-all && \
+    yum -y install  git2u-all jq && \
     yum -y clean all --enablerepo='*'
 
 
