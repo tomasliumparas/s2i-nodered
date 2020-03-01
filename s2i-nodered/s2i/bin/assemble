@@ -22,6 +22,7 @@ fi
 echo "---> Installing application source..."
 cp -Rf /tmp/src/. ./
 
+touch ./.config.json
 jq '. + { "projects": { "projects": {}, "activeProject": "main" }}' ./.config.json
 
 echo "---> Building application from source..."
