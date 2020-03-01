@@ -19,14 +19,16 @@ if [ "$(ls /tmp/artifacts/ 2>/dev/null)" ]; then
   mv /tmp/artifacts/. ./
 fi
 
-echo "---> Installing application source..."
+echo "---> Installing application source:"
 cp -Rf /tmp/src/. ./
+ls -lh
 
 echo "---> Initializing empty config.json"
-touch ./.config.json
+echo "{}" > .config.json
 
 echo "---> Setting active project: main"
-jq '. + { "projects": { "projects": {}, "activeProject": "main" }}' ./.config.json
+jq '. + { "projects": { "projects": {}, "activeProject": "main" }}' .config.json > .config.temp.json && mv .config.temp.json .config.json
+cat .config.json
 
 echo "---> Building application from source..."
 # TODO: Add build steps for your application, eg npm install, bundle install, pip install, etc.
