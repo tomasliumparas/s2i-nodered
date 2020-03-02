@@ -31,7 +31,7 @@ jq '. + { "projects": { "projects": {}, "activeProject": "main" }}' .config.json
 cat .config.json
 
 echo "---> Install Node-red project dependencies"
-npm install --no-audit --only prod projects/main
+npm install --no-audit --no-update-notifier --save --save-prefix="~" --production projects/main
 
 echo "---> Building application from source..."
 # TODO: Add build steps for your application, eg npm install, bundle install, pip install, etc.
