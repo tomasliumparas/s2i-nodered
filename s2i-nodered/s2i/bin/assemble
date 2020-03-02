@@ -30,6 +30,9 @@ echo "---> Setting active project: main"
 jq '. + { "projects": { "projects": {}, "activeProject": "main" }}' .config.json > .config.temp.json && mv .config.temp.json .config.json
 cat .config.json
 
+echo "---> Setting credential secret: nodered"
+jq '. + { "_credentialSecret": "nodered" }' .config.json > .config.temp.json && mv .config.temp.json .config.json
+
 echo "---> Install Node-red project dependencies"
 npm install --no-audit --no-update-notifier --save --save-prefix="~" --production projects/main
 
