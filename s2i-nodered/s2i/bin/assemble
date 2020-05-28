@@ -23,6 +23,11 @@ echo "---> Installing application source:"
 cp -Rf /tmp/src/. ./
 ls -lh
 
+# Change the npm registry mirror if provided
+if [ -n "$NPM_MIRROR" ]; then
+	npm config set registry $NPM_MIRROR
+fi
+
 echo "---> Initializing empty config.json"
 echo "{}" > .config.json
 
