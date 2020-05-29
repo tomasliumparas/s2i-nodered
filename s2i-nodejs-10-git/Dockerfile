@@ -52,8 +52,8 @@ USER 0
 
 # Install GITv.2
 RUN yum -y remove git && \
-    yum -y install  https://centos7.iuscommunity.org/ius-release.rpm && \
-    yum -y install  git2u-all jq && \
+    yum -y install yum -y install https://packages.endpoint.com/rhel/7/os/x86_64/endpoint-repo-1.7-1.x86_64.rpm && \
+    yum -y install  git jq && \
     yum -y clean all --enablerepo='*'
 
 
