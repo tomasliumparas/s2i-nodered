@@ -3,7 +3,7 @@ FROM centos/nodejs-10-centos7
 # This image provides a Node.JS environment you can use to run your Node.JS
 # applications.
 
-EXPOSE 8080
+# EXPOSE 8080
 
 # Add $HOME/node_modules/.bin to the $PATH, allowing user to make npm scripts
 # available on the CLI without using npm's --global installation mode
@@ -64,4 +64,3 @@ RUN chown -R 1001:0 ${APP_ROOT} && chmod -R ug+rwx ${APP_ROOT} && \
     rpm-file-permissions
 
 USER 1001
-
