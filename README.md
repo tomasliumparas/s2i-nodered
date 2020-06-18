@@ -20,14 +20,30 @@ It provides a browser-based editor that makes it easy to wire together flows usi
 ## Usage
 The structure of example-app can look like this:
 ```
-./projects/main/flow.json
+.
+├── projects
+│   └── main
+│       ├── flows.json        # Project flows file
+│       └── package.json      # Project package file
+└── settings.js               # Optional Nodered settings file
 ```
 A file containing Node-red flows. Which will be set as an active project. Currently only "main" is supported
 
+Example content of Project package file:
 ```
-./settings.js
+{
+    "name": "main",
+    "description": "A Node-RED Project",
+    "version": "0.0.1",
+    "dependencies": {},
+    "node-red": {
+        "settings": {
+            "flowFile": "flows.json",
+            "credentialsFile": "flows_cred.json"
+        }
+    }
+}
 ```
-An override Node-red settings file (optional)
 
 
 ### Building on OpenShift
@@ -51,7 +67,7 @@ Hello OpenShift!
 
 Creating OpenShift route:
 ```bash
-oc expose 
+oc expose
 ```
 
 ### Building using standalone S2i
@@ -71,5 +87,3 @@ TBD
 
 ## Default user
 By default, Node-red container runs as UID 1001. That means the volume mounted directories for the files (if mounted using -v option) need to be prepared properly, so the UID 1001 can read them.
-
-
