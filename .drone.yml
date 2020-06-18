@@ -3,25 +3,16 @@ type: docker
 name: default
 
 steps:
-- name: Install S2i
-  image: alpine
-  volumes:
-    - name: docker-socket
-      path: /var/run/docker.sock
-  commands:
-    - wget -O - https://github.com/openshift/source-to-image/releases/download/v1.2.0/source-to-image-v1.2.0-2a579ecd-linux-amd64.tar.gz | tar -xzvf -
-
 - name: BUILD s2i-nodejs-10-git-centos7
-  image: alpine
+  image: getais/drone-plugin-s2i
   volumes:
     - name: docker-socket
       path: /var/run/docker.sock
   commands:
-    - apk add docker
     - docker build -t s2i-nodejs-10-git-centos7 s2i-nodejs-10-git/
 
 - name: BUILD s2i-nodered-base-centos7
-  image: alpine
+  image: getais/drone-plugin-s2i
   volumes:
     - name: docker-socket
       path: /var/run/docker.sock
@@ -30,7 +21,7 @@ steps:
 
 
 - name: BUILD s2i-nodered-centos7
-  image: alpine
+  image: getais/drone-plugin-s2i
   volumes:
     - name: docker-socket
       path: /var/run/docker.sock
@@ -40,7 +31,6 @@ steps:
     DOCKER_TOKEN:
       from_secret: DOCKER_TOKEN
   commands:
-    - apk add docker
     - docker build -t s2i-nodered-centos7 s2i-nodered/
     - docker tag s2i-nodered-centos7 getais/s2i-nodered-centos7
     - docker login -u $DOCKER_USER -p $DOCKER_TOKEN
@@ -48,7 +38,7 @@ steps:
 
 
 - name: BUILD nodered-example-app
-  image: alpine
+  image: getais/drone-plugin-s2i
   volumes:
     - name: docker-socket
       path: /var/run/docker.sock
@@ -61,4 +51,3 @@ volumes:
   - name: docker-socket
     host:
       path: /var/run/docker.sock
-
