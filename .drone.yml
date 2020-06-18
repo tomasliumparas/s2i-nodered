@@ -17,7 +17,7 @@ steps:
     - name: docker-socket
       path: /var/run/docker.sock
   commands:
-    - ./s2i build s2i-nodered-base/ s2i-nodejs-10-git-centos7 s2i-nodered-base-centos7
+    - s2i build s2i-nodered-base/ s2i-nodejs-10-git-centos7 s2i-nodered-base-centos7
 
 
 - name: BUILD s2i-nodered-centos7
@@ -43,7 +43,7 @@ steps:
     - name: docker-socket
       path: /var/run/docker.sock
   commands:
-    - ./s2i build example-app s2i-nodered-centos7 nodered-example-app
+    - s2i build example-app s2i-nodered-centos7 nodered-example-app
 
 
 
