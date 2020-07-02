@@ -43,7 +43,7 @@ steps:
     - name: docker-socket
       path: /var/run/docker.sock
   commands:
-    - s2i build example-app s2i-nodered-centos7 nodered-example-app
+    - s2i build example-app getais/s2i-nodered-centos7 nodered-example-app
 
 
 
