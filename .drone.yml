@@ -31,10 +31,10 @@ steps:
     DOCKER_TOKEN:
       from_secret: DOCKER_TOKEN
   commands:
-    - docker build -t getais/s2i-nodered-centos7 -t getais/s2i-nodered-centos7:1.1 s2i-nodered/
+    - docker build -t getais/s2i-nodered-centos7 -t getais/s2i-nodered-centos7:1.1.2 s2i-nodered/
     - docker login -u $DOCKER_USER -p $DOCKER_TOKEN
     - docker push getais/s2i-nodered-centos7
-    - docker push getais/s2i-nodered-centos7:1.1
+    - docker push getais/s2i-nodered-centos7:1.1.2
 
 
 - name: BUILD nodered-example-app
