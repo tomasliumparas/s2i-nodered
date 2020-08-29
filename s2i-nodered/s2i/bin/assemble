@@ -19,14 +19,18 @@ if [ "$(ls /tmp/artifacts/ 2>/dev/null)" ]; then
   mv /tmp/artifacts/. ./
 fi
 
-if [ -n "$PROJECT_NAME"]; then
+if [ -n "$NR_PROJECT_REPO" ]; then
 	echo "---> Installing application source (single project):"
 	mkdir -p ./projects/main
 	cp -Rf /tmp/src/. ./projects/main
 	ls -lh
+
+	if [ -f /tmp/src/settings.js ]; then
+		cp /tmp/src/settings.js ./
+	fi
 fi
 
-if [ -z "$PROJECT_NAME"]; then
+if [ -z "$NR_PROJECT_REPO"]; then
 	echo "---> Installing application source (default mode):"
 	cp -Rf /tmp/src/. ./
 	ls -lh
