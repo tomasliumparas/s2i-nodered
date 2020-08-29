@@ -19,9 +19,18 @@ if [ "$(ls /tmp/artifacts/ 2>/dev/null)" ]; then
   mv /tmp/artifacts/. ./
 fi
 
-echo "---> Installing application source:"
-cp -Rf /tmp/src/. ./
-ls -lh
+if [ -n "$PROJECT_NAME"]; then
+	echo "---> Installing application source (single project):"
+	mkdir -p ./projects/main
+	cp -Rf /tmp/src/. ./projects/main
+	ls -lh
+fi
+
+if [ -z "$PROJECT_NAME"]; then
+	echo "---> Installing application source (default mode):"
+	cp -Rf /tmp/src/. ./
+	ls -lh
+fi
 
 # Change the npm registry mirror if provided
 if [ -n "$NPM_MIRROR" ]; then
